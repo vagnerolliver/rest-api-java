@@ -14,13 +14,21 @@ public class UserServiceImp implements UserService {
 
     private static final AtomicLong counter = new AtomicLong();
 
-	static {
-		users = populateDummyUsers();
-	}
+	static { users = populateDummyUsers(); }
 
 	public List<User> findAllUsers() {
 		return users;
 	}
+
+	public User findById(long id) {
+
+	    for(User user: users) {
+	        if(user.getId() == id ) {
+	            return user;
+            }
+        }
+	    return  null;
+    }
 
 	private static List populateDummyUsers(){
         List<User> users = new ArrayList<User>();
