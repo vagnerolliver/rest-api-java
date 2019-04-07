@@ -21,7 +21,6 @@ public class UserServiceImp implements UserService {
 	}
 
 	public User findById(long id) {
-
 	    for(User user: users) {
 	        if(user.getId() == id ) {
 	            return user;
@@ -30,7 +29,25 @@ public class UserServiceImp implements UserService {
 	    return  null;
     }
 
-	private static List populateDummyUsers(){
+    public void saveUser(User user) {
+        user.setId(counter.incrementAndGet());
+        users.add(user);
+    }
+
+    public boolean isUserExist(User user) {
+        return findByName(user.getName())!=null;
+    }
+
+    public User findByName(String name) {
+        for(User user : users){
+            if(user.getName().equalsIgnoreCase(name)){
+                return user;
+            }
+        }
+        return null;
+    }
+
+    private static List populateDummyUsers(){
         List<User> users = new ArrayList<User>();
         users.add(new User(counter.incrementAndGet(),"Sam",30, 70000));
         users.add(new User(counter.incrementAndGet(),"Tom",40, 50000));
